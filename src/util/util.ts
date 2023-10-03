@@ -37,3 +37,11 @@ export async function deleteLocalFiles(files: Array<string>) {
     fs.unlinkSync(file);
   }
 }
+
+// validateIfUrlPointsToAnImage
+// helper function to validate if the imageURL indeed points to an image
+// INPUTS
+//    imageUrl: the image URL that needs to be validated
+export function validateIfUrlPointsToAnImage(imageUrl: String) {
+  return(imageUrl.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
