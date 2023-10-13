@@ -15,3 +15,9 @@ kubectl --kubeconfig kube_config_cluster.yml --namespace monitoring port-forward
 
 kubectl --kubeconfig kube_config_cluster.yml get pod --namespace monitoring 
 kubectl --kubeconfig kube_config_cluster.yml --namespace monitoring  port-forward kube-prometheus-stack-1670914524-grafana-87678fb8d-7nc7x 3000
+
+
+
+# tracing project
+kubectl --namespace monitoring port-forward svc/prometheus-grafana --address 0.0.0.0 3000:80
+kubectl port-forward svc/frontend-service  --address 0.0.0.0  8080:8080
