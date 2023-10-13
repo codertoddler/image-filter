@@ -1,0 +1,17 @@
+## Before port forwarding the pod, let's view the pod name as
+export POD_NAME=$(kubectl --kubeconfig kube_config_cluster.yml get pods --namespace falco -l "app.kubernetes.io/name=falco-exporter,app.kubernetes.io/instance=falco-exporter" -o jsonpath="{.items[0].metadata.name}")
+echo $POD_NAME
+## Port forward
+kubectl --kubeconfig kube_config_cluster.yml port-forward --namespace falco $POD_NAME 9376
+
+
+## View the pod, service names and ports
+kubectl --kubeconfig kube_config_cluster.yml get pods,svc --namespace=monitoring
+## Option 1 - You can either Port forward the specific pod 
+kubectl --kubeconfig kube_config_cluster.yml --namespace monitoring port-forward pod/prometheus-kube-prometheus-stack-1670-prometheus-0 9090
+## Option 2 - Alternatively, you can Port forward the service
+kubectl --kubeconfig kube_config_cluster.yml --namespace monitoring port-forward service/kube-prometheus-stack-1670-prometheus 9090:9090
+
+
+kubectl --kubeconfig kube_config_cluster.yml get pod --namespace monitoring 
+kubectl --kubeconfig kube_config_cluster.yml --namespace monitoring  port-forward kube-prometheus-stack-1670914524-grafana-87678fb8d-7nc7x 3000
